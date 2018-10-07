@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
 import { actions } from "./src/actions";
 import { connect, Provider } from "react-redux";
 import { store } from "./src/store";
+import { DevTools } from "./src/DevTools";
 
 export default class Root extends React.Component {
   render() {
@@ -38,6 +39,7 @@ class App extends React.Component<AppProps> {
             <Text style={styles.touchableText}>-</Text>
           </TouchableHighlight>
         </View>
+        <DevTools />
       </View>
     );
   }

@@ -1,4 +1,10 @@
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import reducer from './reducer';
+import { DevTools } from './DevTools';
 
-export const store = createStore(reducer);
+const enhancer = compose(
+    applyMiddleware(),
+    DevTools.instrument()
+);
+
+export const store = createStore(reducer, enhancer as any);
