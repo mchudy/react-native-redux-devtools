@@ -4,9 +4,11 @@
   "description": "Redux debugging tools for React Native apps",
   "main": "src/index.js",
   "types": "src/index.d.ts",
-  "repository": "https://github.com/mchudy/react-native-redux-devtools.git",
   "author": "Marcin Chudy <marcinchudy94@gmail.com>",
   "license": "MIT",
-  "private": false,
-  "dependencies": {}
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mchudy/react-native-redux-devtools.git"
+  }
 }
