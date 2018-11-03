@@ -1,1 +1,2 @@
-export default 'index';
+export * from './DevTools';
+export * from './ReactNativeMonitor';
