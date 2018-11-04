@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     margin: 10
   },
   touchable: {
+    borderRadius: 30,
     marginTop: 15,
     marginLeft: 10,
     marginRight: 10,
@@ -83,7 +84,6 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: "#cccccc",
-    borderRadius: 2,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#F5FCFF"
