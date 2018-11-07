@@ -10,9 +10,12 @@ export class ActionListRow extends React.Component<any> {
     const { id, action, baseTime } = this.props;
     const timeDiff = action.timestamp - baseTime;
     let formattedTime = moment(timeDiff).format(TIME_FORMAT);
-    if (action.action.type === '@@INIT') {
+    if (action.type === '@@INIT') {
       formattedTime = moment(baseTime).format('HH:mm:ss.SS');
     }
+    console.warn(action);
+    return null;
+
     return (
       <View
         style={{
