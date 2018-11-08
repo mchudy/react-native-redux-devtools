@@ -3,16 +3,20 @@ import { FlatList, View, StyleSheet } from 'react-native';
 import { ActionListRow } from './ActionListRow';
 import { ActionListHeader } from './ActionListHeader';
 import { Action } from './state';
+import bind from 'bind-decorator';
+
+function getTimestamps(actions: ActionsDict, actionIds: number[], actionId: number) {
+  const idx = actionIds.indexOf(actionId);
+  const prevActionId = actionIds[idx - 1];
+
+  return {
+    current: actions[actionId].timestamp,
+    previous: idx ? actions[prevActionId].timestamp : 0
+  };
+}
 
 export class ActionList extends React.Component<ActionListProps> {
   private flatListRef: FlatList<any> | null = null;
-  private baseTime: any;
-
-  constructor(props: any) {
-    super(props);
-
-    this.renderItem = this.renderItem.bind(this);
-  }
 
   componentDidUpdate(prevProps: any) {
     if (this.props.lastActionId !== prevProps.lastActionId) {
@@ -21,14 +25,29 @@ export class ActionList extends React.Component<ActionListProps> {
   }
 
   render() {
-    const { actions, actionIds, onToggleAction, skippedActionIds,
-          selectedActionId, startActionId, onSearch, searchValue, currentActionId,
-          onCommit, onSweep, onJumpToState } = this.props;
+    const {
+      actions,
+      actionIds,
+      onToggleAction,
+      skippedActionIds,
+      selectedActionId,
+      startActionId,
+      onSearch,
+      searchValue,
+      currentActionId,
+      onCommit,
+      onSweep,
+      onJumpToState
+    } = this.props;
     const lowerSearchValue = searchValue && searchValue.toLowerCase();
-    const filteredActionIds = searchValue ? actionIds.filter(
-    id => (actions[id] as any).action.type.toLowerCase().indexOf(lowerSearchValue) !== -1
-    ) : actionIds;
-
+    const filteredActionIds = searchValue
+      ? actionIds.filter(
+          id =>
+            (actions[id] as any).action.type
+              .toLowerCase()
+              .indexOf(lowerSearchValue) !== -1
+        )
+      : actionIds;
 
     // const { onSearch, onCommit, onSweep, skippedActionIds, actionIds } = this.props;
 
@@ -39,22 +58,23 @@ export class ActionList extends React.Component<ActionListProps> {
     //   ...this.props.actionsById[id],
     //   id
     // }));
-    const filteredActions = filteredActionIds.map(actionId => (actions[actionId] as any).action) as any;
 
     return (
       <FlatList
-        data={filteredActions}
+        data={filteredActionIds}
         renderItem={this.renderItem}
         ref={(ref: any) => (this.flatListRef = ref)}
         keyExtractor={this.keyExtractor}
-        ListHeaderComponent={<ActionListHeader 
-        
-            // onSearch={onSearch}
-            // onCommit={onCommit}
-            // onSweep={onSweep}
-            // hasSkippedActions={skippedActionIds.length > 0}
-            // hasStagedActions={actionIds.length > 1}
-        />}
+        ListHeaderComponent={
+          <ActionListHeader
+
+          // onSearch={onSearch}
+          // onCommit={onCommit}
+          // onSweep={onSweep}
+          // hasSkippedActions={skippedActionIds.length > 0}
+          // hasStagedActions={actionIds.length > 1}
+          />
+        }
         ItemSeparatorComponent={() => (
           <View
             style={{
@@ -68,38 +88,42 @@ export class ActionList extends React.Component<ActionListProps> {
   }
 
   private keyExtractor(item: any) {
-    console.warn(item);
     return item.toString();
-    return item.id.toString();
   }
 
-  private renderItem({ item }: any) {
+  @bind
+  private renderItem({ item: actionId }: any) {
     return (
       <ActionListRow
-        key={item.id}
-        id={item.id}
-        action={item}
-        baseTime={this.baseTime}
+        key={actionId}
+        isInitAction={!actionId}
+        isInFuture={actionId > this.props.currentActionId}
+        timestamps={getTimestamps(this.props.actions, this.props.actionIds, actionId)}
+        action={(this.props.actions[actionId] as any).action}
+        isSkipped={this.props.skippedActionIds.indexOf(actionId) !== -1}
+        isSelected={false}
       />
     );
   }
 }
 
+type ActionsDict =  {
+  [id: number]: Action;
+};
+
 interface ActionListProps {
-    actions: {
-      [id: number]: Action
-    };
-    actionIds: number[];
-    lastActionId: number;
-    onToggleAction: (actionId: number) => void;
-    skippedActionIds: number[];
-    selectedActionId: number | null;
-    startActionId: null | number;
-    // onSelect: (e: SyntheticMouseEvent, actionId: number) => void;
-    onSearch: (searchStr: string) => void;
-    searchValue?: string;
-    currentActionId: number;
-    onCommit: () => void;
-    onSweep: () => void;
-    onJumpToState: (actionId: number) => void;
-  };
+  actions: ActionsDict;
+  actionIds: number[];
+  lastActionId: number;
+  onToggleAction: (actionId: number) => void;
+  skippedActionIds: number[];
+  selectedActionId: number | null;
+  startActionId: null | number;
+  // onSelect: (e: SyntheticMouseEvent, actionId: number) => void;
+  onSearch: (searchStr: string) => void;
+  searchValue?: string;
+  currentActionId: number;
+  onCommit: () => void;
+  onSweep: () => void;
+  onJumpToState: (actionId: number) => void;
+}

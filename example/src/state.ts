@@ -1,6 +1,7 @@
 export interface Action {
-  timestamp: Date;
+  timestamp: number;
   error?: string;
+  type: string;
 }
 
 export type TabName = 'Action' | 'Diff' | 'State';
