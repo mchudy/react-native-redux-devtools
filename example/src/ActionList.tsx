@@ -2,7 +2,7 @@ import * as React from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import { ActionListRow } from './ActionListRow';
 import { ActionListHeader } from './ActionListHeader';
-import { Action } from './state';
+import { Action, ActionsDict } from './state';
 import bind from 'bind-decorator';
 
 function getTimestamps(actions: ActionsDict, actionIds: number[], actionId: number) {
@@ -106,10 +106,6 @@ export class ActionList extends React.Component<ActionListProps> {
     );
   }
 }
-
-type ActionsDict =  {
-  [id: number]: Action;
-};
 
 interface ActionListProps {
   actions: ActionsDict;

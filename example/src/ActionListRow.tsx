@@ -3,7 +3,6 @@ import { View, Text, Platform, StyleSheet } from 'react-native';
 import { Action } from './state';
 import dateformat from 'dateformat';
 
-const TIME_FORMAT = '+mm:ss.SS';
 const MONOSPACE_FONT = Platform.OS === 'android' ? 'monospace' : 'Menlo';
 
 export class ActionListRow extends React.Component<ActionListRowProps> {
@@ -69,7 +68,8 @@ const styles = StyleSheet.create({
   actionTypeText: {
     color: 'white',
     flex: 1,
-    fontFamily: MONOSPACE_FONT
+    fontFamily: MONOSPACE_FONT,
+    fontSize: 11
   },
   timeContainer: {
     borderRadius: 5,
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     color: '#b0b0b0',
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: MONOSPACE_FONT
   }
 });

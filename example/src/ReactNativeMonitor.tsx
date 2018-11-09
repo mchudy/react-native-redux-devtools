@@ -3,12 +3,16 @@ import { StyleSheet, View, FlatList } from 'react-native';
 import { ActionList } from './ActionList';
 import { Dispatch, Action } from 'redux';
 import { Delta } from 'jsondiffpatch';
-import createDiffPatcher, { PropertyFilter, ObjectHash } from './createDiffPatcher';
-import { MonitorState } from './state';
+import createDiffPatcher, {
+  PropertyFilter,
+  ObjectHash
+} from './createDiffPatcher';
+import { MonitorState, Tab, TabName } from './state';
 import { reducer, updateMonitorState } from './redux';
 const ActionCreators = require('redux-devtools').ActionCreators;
 import bind from 'bind-decorator';
 import getInspectedState from './utils/getInspectedState';
+import { ActionPreview } from './ActionPreview';
 
 const CONTAINER_HEIGHT = 250;
 
@@ -131,7 +135,10 @@ export class ReactNativeMonitor extends React.Component<
       monitorState.inspectedStatePath !== nextMonitorState.inspectedStatePath ||
       monitorState.inspectedActionPath !== nextMonitorState.inspectedActionPath
     ) {
-      this.setState(createIntermediateState(nextProps, nextMonitorState) as any);
+      this.setState(createIntermediateState(
+        nextProps,
+        nextMonitorState
+      ) as any);
     }
   }
 
@@ -139,20 +146,20 @@ export class ReactNativeMonitor extends React.Component<
     const {
       stagedActionIds: actionIds,
       actionsById: actions,
-      // computedStates,
+      computedStates,
       skippedActionIds,
       currentStateIndex,
-      monitorState
+      monitorState,
     } = this.props;
     const {
       selectedActionId,
       startActionId,
       searchValue,
-      // tabName
+      tabName
     } = monitorState;
     // const inspectedPathType =
     //   tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
-    // const { action, nextState, delta, error } = this.state;
+    const { action, nextState, delta, error } = this.state;
 
     return (
       <View style={styles.container}>
@@ -173,6 +180,22 @@ export class ReactNativeMonitor extends React.Component<
           currentActionId={actionIds[currentStateIndex]}
           lastActionId={getLastActionId(this.props)}
         />
+        <ActionPreview
+          {...{
+            delta,
+            error,
+            nextState,
+            computedStates,
+            action,
+            actions,
+            selectedActionId,
+            startActionId,
+            tabName
+          } as any}
+          onInspectPath={() => null}
+          inspectedPath={[]}
+          onSelectTab={this.handleSelectTab}
+        />
       </View>
     );
   }
@@ -180,6 +203,11 @@ export class ReactNativeMonitor extends React.Component<
   @bind
   private handleSearch(value: string) {
     this.updateMonitorState({ searchValue: value });
+  }
+
+  @bind
+  private handleSelectTab(tabName: TabName) {
+    this.updateMonitorState({ tabName });
   }
 }
 
@@ -202,6 +230,7 @@ interface ReactNativeMonitorProps {
   stagedActions: number[];
   diffObjectHash: ObjectHash;
   diffPropertyFilter: PropertyFilter;
+  tabName: TabName;
 }
 
 export interface ReactNativeMonitorState {

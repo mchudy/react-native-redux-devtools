@@ -4,10 +4,14 @@ export interface Action {
   type: string;
 }
 
+export type ActionsDict =  {
+  [id: number]: Action;
+};
+
 export type TabName = 'Action' | 'Diff' | 'State';
 export type Tab = {
   name: TabName;
-  component: React.Component;
+  component: React.Component | React.ReactElement<any>;
 };
 
 export type ReduxState = {
