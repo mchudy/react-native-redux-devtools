@@ -5,7 +5,11 @@ export enum ActionTypes {
 
 export const actions = {
     increment: () => ({
-        type: ActionTypes.INCREMENT
+        type: ActionTypes.INCREMENT,
+        payload: {
+            a: '1',
+            b: '2'
+        }
     }),
     decrement: () => ({
         type: ActionTypes.DECREMENT

@@ -14,6 +14,7 @@
     "jsondiffpatch": "^0.3.11",
     "moment": "^2.22.2",
     "react": "16.5.0",
+    "react-base16-styling": "^0.6.0",
     "react-native": "0.57.2",
     "react-native-json-tree": "^1.2.0",
     "react-redux": "^5.0.7",

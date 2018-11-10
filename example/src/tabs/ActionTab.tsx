@@ -1,6 +1,20 @@
 import * as React from 'react';
-import { Text } from 'react-native';
+import { Action } from '../state';
+import JSONTree from 'react-native-json-tree';
+import theme from '../themes';
+import getJsonTreeTheme from './utils/getJsonTreeTheme';
+import { View } from 'react-native';
 
-export const ActionTab = () => (
-    <Text>action</Text>
-);
+export class ActionTab extends React.Component<ActionTabProps> {
+  render() {
+    const { action } = this.props;
+    const treeTheme = getJsonTreeTheme(theme);
+    return (
+      <JSONTree data={action} hideRoot theme={treeTheme} invertTheme={false} />
+    );
+  }
+}
+
+interface ActionTabProps {
+  action: Action;
+}
