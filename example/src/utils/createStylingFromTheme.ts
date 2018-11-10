@@ -1,8 +1,7 @@
-import { createStyling } from 'react-base16-styling';
+import { createStyling, invertTheme } from 'react-base16-styling';
 import rgba from 'hex-rgba';
 import inspector from '../themes/inspector';
 import * as reduxThemes from 'redux-devtools-themes';
-import * as inspectorThemes from '../themes';
 import { StyleSheet } from 'react-native';
 
 const colorMap = (theme: any) => ({
@@ -33,7 +32,15 @@ const colorMap = (theme: any) => ({
 
 const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   inspector: {
-    flex: 1
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    height: 200,
+    padding: 5,
+    borderTopWidth: 1,
+    borderTopColor: map.BORDER_COLOR,
+    backgroundColor: map.BACKGROUND_COLOR
   }
   //   'flex-direction': 'column',
   //   width: '100%',
@@ -368,25 +375,18 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   // }
 });
 
-let themeSheet;
 
 const getDefaultThemeStyling = (theme: string) => {
-  themeSheet = getSheetFromColorMap(colorMap(theme));
+  const themeSheet = getSheetFromColorMap(colorMap(theme));
   return StyleSheet.create(themeSheet as any);
 };
 
-export const base16Themes = { ...reduxThemes, ...inspectorThemes };
+export const base16Themes = reduxThemes;
 
 export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
-  defaultBase16: inspector,
+  defaultBase16: (reduxThemes as any).nicinabox,
   reduxThemes
 });
-
-const styling = createStylingFromTheme('inspector');
-console.warn(styling);
-console.warn(styling('rightSliderRotateShown'));
-
-
 
 // export const createStylingFromTheme = createStyling(getStylingFromBase16, {
 //   defaultBase16: inspector,

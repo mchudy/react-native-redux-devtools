@@ -107,11 +107,8 @@ function createIntermediateState(
 }
 
 function createThemeState(props: any) {
-  const base16Theme = getBase16Theme(props.theme, base16Themes);
-  console.warn(base16Theme);
-  console.warn(props);
-  const styling = createStylingFromTheme(props.theme);
-  console.warn(styling('inspector').style);
+  const base16Theme = getBase16Theme('nicinabox', base16Themes);
+  const styling = createStylingFromTheme('nicinabox');
   return { base16Theme, styling };
 }
 
@@ -123,7 +120,7 @@ export class ReactNativeMonitor extends React.Component<
   static defaultProps = {
     select: (state: any) => state,
     supportImmutable: false,
-    theme: 'inspector',
+    theme: 'nicinabox',
     invertTheme: false
   };
 
@@ -179,7 +176,7 @@ export class ReactNativeMonitor extends React.Component<
     const { action, nextState, delta, error, themeState } = this.state;
     const { base16Theme, styling } = themeState;
     return (
-      <View style={styles.container}>
+      <View {...styling('inspector')}>
         <ActionList
           {...{
             actions,
