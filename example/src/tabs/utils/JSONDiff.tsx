@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Delta } from 'jsondiffpatch';
 import JSONTree from 'react-native-json-tree';
-import themes from '../../themes';
 import getItemString from './getItemString';
 const stringify = require('javascript-stringify');
 
@@ -52,7 +51,7 @@ export class JSONDiff extends React.PureComponent<JSONDiffProps> {
         <JSONTree
         //   labelRenderer={labelRenderer}
           invertTheme={false}
-          theme={themes}
+          theme={{}}
           data={delta}
           getItemString={getItemString}
           // valueRenderer={this.valueRenderer}

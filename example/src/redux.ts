@@ -12,7 +12,7 @@ const DEFAULT_STATE: ReduxState = {
   startActionId: null,
   inspectedActionPath: [],
   inspectedStatePath: [],
-  tabName: 'Diff'
+  tabName: 'Action'
 };
 
 export function updateMonitorState(monitorState: MonitorState) {

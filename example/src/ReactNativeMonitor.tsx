@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { View } from 'react-native';
 import { ActionList } from './ActionList';
 import { Dispatch, Action } from 'redux';
 import { Delta } from 'jsondiffpatch';
@@ -13,10 +13,11 @@ const ActionCreators = require('redux-devtools').ActionCreators;
 import bind from 'bind-decorator';
 import getInspectedState from './utils/getInspectedState';
 import { ActionPreview } from './ActionPreview';
-import { createStylingFromTheme, base16Themes } from './utils/createStylingFromTheme';
-const getBase16Theme =  require('react-base16-styling').getBase16Theme;
-
-const CONTAINER_HEIGHT = 250;
+import {
+  createStylingFromTheme,
+  base16Themes
+} from './utils/createStylingFromTheme';
+const getBase16Theme = require('react-base16-styling').getBase16Theme;
 
 const {
   commit,
@@ -107,8 +108,8 @@ function createIntermediateState(
 }
 
 function createThemeState(props: any) {
-  const base16Theme = getBase16Theme('nicinabox', base16Themes);
-  const styling = createStylingFromTheme('nicinabox');
+  const base16Theme = getBase16Theme(props.theme, base16Themes);
+  const styling = createStylingFromTheme(props.theme);
   return { base16Theme, styling };
 }
 
@@ -128,7 +129,7 @@ export class ReactNativeMonitor extends React.Component<
     super(props);
 
     this.state = {
-      ...createIntermediateState(props, props.monitorState) as any,
+      ...(createIntermediateState(props, props.monitorState) as any),
       themeState: createThemeState(props)
     };
   }
@@ -197,7 +198,7 @@ export class ReactNativeMonitor extends React.Component<
         />
         <ActionPreview
           {...{
-            base16Theme, 
+            base16Theme,
             invertTheme,
             delta,
             error,
@@ -207,7 +208,8 @@ export class ReactNativeMonitor extends React.Component<
             actions,
             selectedActionId,
             startActionId,
-            tabName
+            tabName,
+            styling
           } as any}
           onInspectPath={() => null}
           inspectedPath={[]}
@@ -260,17 +262,3 @@ export interface ReactNativeMonitorState {
   delta?: Delta;
   error?: string;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
-    height: CONTAINER_HEIGHT,
-    padding: 5,
-    borderTopWidth: 1,
-    borderTopColor: '#eeeeee',
-    backgroundColor: '#2A2F3A'
-  }
-});

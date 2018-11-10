@@ -1,8 +1,9 @@
 import { createStyling, invertTheme } from 'react-base16-styling';
 import rgba from 'hex-rgba';
-import inspector from '../themes/inspector';
 import * as reduxThemes from 'redux-devtools-themes';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
+
+const MONOSPACE_FONT = Platform.OS === 'android' ? 'monospace' : 'Menlo';
 
 const colorMap = (theme: any) => ({
   TEXT_COLOR: theme.base06,
@@ -32,31 +33,16 @@ const colorMap = (theme: any) => ({
 
 const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   inspector: {
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
-    left: 0,
-    height: 200,
-    padding: 5,
+    flex: 1,
     borderTopWidth: 1,
     borderTopColor: map.BORDER_COLOR,
     backgroundColor: map.BACKGROUND_COLOR
-  }
-  //   'flex-direction': 'column',
-  //   width: '100%',
-  //   height: '100%',
-  //   'font-family': 'monaco, Consolas, "Lucida Console", monospace',
-  //   'font-size': '12px',
-  //   'font-smoothing': 'antialiased',
-  //   'line-height': '1.5em',
+  },
 
-  //   'background-color': map.BACKGROUND_COLOR,
-  //   color: map.TEXT_COLOR
-  // },
-
-  // inspectorWide: {
-  //   'flex-direction': 'row'
-  // },
+  actionListItemSeparator: {
+    backgroundColor: map.LIST_BORDER_COLOR,
+    height: StyleSheet.hairlineWidth
+  },
 
   // actionList: {
   //   'flex-basis': '40%',
@@ -91,28 +77,12 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   //   'margin-right': '10px'
   // },
 
-  // actionListWide: {
-  //   'flex-basis': '40%',
-  //   'border-bottom': 'none',
-  //   'border-right-width': '3px',
-  //   'border-right-style': 'double'
-  // },
-
-  // actionListItem: {
-  //   'border-bottom-width': '1px',
-  //   'border-bottom-style': 'solid',
-  //   display: 'flex',
-  //   'justify-content': 'space-between',
-  //   padding: '5px 10px',
-  //   cursor: 'pointer',
-  //   'user-select': 'none',
-
-  //   '&:last-child': {
-  //     'border-bottom-width': 0
-  //   },
-
-  //   'border-bottom-color': map.BORDER_COLOR
-  // },
+  actionListItem: {
+    paddingHorizontal: 5,
+    paddingVertical: 4,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
 
   // actionListItemSelected: {
   //   'background-color': map.SELECTED_BACKGROUND_COLOR
@@ -148,11 +118,28 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   //   display: 'inline-flex'
   // },
 
-  // actionListItemName: {
-  //   overflow: 'hidden',
-  //   'text-overflow': 'ellipsis',
-  //   'line-height': '20px'
-  // },
+  actionListItemName: {
+    color: map.TEXT_COLOR,
+    flex: 1,
+    fontFamily: MONOSPACE_FONT,
+    fontSize: 11
+  },
+
+  actionListItemTimeContainer: {
+    borderRadius: 3,
+    backgroundColor: map.ACTION_TIME_BACK_COLOR,
+    padding: 3
+  },
+
+  actionListItemTimeText: {
+    color: map.ACTION_TIME_COLOR,
+    fontSize: 10,
+    fontFamily: MONOSPACE_FONT
+  },
+
+  actionPreviewContainer: {
+    minHeight: 150
+  },
 
   // actionListItemNameSkipped: {
   //   'text-decoration': 'line-through',
@@ -261,60 +248,44 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   //   color: map.ITEM_HINT_COLOR
   // },
 
-  // previewHeader: {
-  //   flex: '0 0 30px',
-  //   padding: '5px 10px',
-  //   'align-items': 'center',
-  //   'border-bottom-width': '1px',
-  //   'border-bottom-style': 'solid',
+  previewHeader: {
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    backgroundColor: map.HEADER_BACKGROUND_COLOR,
+    borderBottomColor: map.HEADER_BORDER_COLOR,
+    flexDirection: 'row'
+  },
 
-  //   'background-color': map.HEADER_BACKGROUND_COLOR,
-  //   'border-bottom-color': map.HEADER_BORDER_COLOR
-  // },
+  selectorButton: {
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    backgroundColor: map.TAB_BACK_COLOR,
+    borderColor: map.TAB_BORDER_COLOR
+  },
 
-  // tabSelector: {
-  //   position: 'relative',
-  //   'z-index': 1,
-  //   display: 'inline-flex',
-  //   float: 'right'
-  // },
+  selectorButtonFirst: {
+    borderLeftWidth: 1,
+    borderTopLeftRadius: 3,
+    borderBottomLeftRadius: 3
+  },
 
-  // selectorButton: {
-  //   cursor: 'pointer',
-  //   position: 'relative',
-  //   padding: '5px 10px',
-  //   'border-style': 'solid',
-  //   'border-width': '1px',
-  //   'border-left-width': 0,
+  selectorButtonLast: {
+    borderTopRightRadius: 3,
+    borderBottomRightRadius: 3
+  },
 
-  //   '&:first-child': {
-  //     'border-left-width': '1px',
-  //     'border-top-left-radius': '3px',
-  //     'border-bottom-left-radius': '3px'
-  //   },
-
-  //   '&:last-child': {
-  //     'border-top-right-radius': '3px',
-  //     'border-bottom-right-radius': '3px'
-  //   },
-
-  //   'background-color': map.TAB_BACK_COLOR,
-
-  //   '&:hover': {
-  //     'background-color': map.TAB_BACK_HOVER_COLOR
-  //   },
-
-  //   'border-color': map.TAB_BORDER_COLOR
-  // },
-
-  // selectorButtonSmall: {
-  //   padding: '0px 8px',
-  //   'font-size': '0.8em'
-  // },
-
-  // selectorButtonSelected: {
-  //   'background-color': map.TAB_BACK_SELECTED_COLOR
-  // },
+  selectorButtonText: {
+    fontFamily: MONOSPACE_FONT,
+    color: map.TEXT_COLOR,
+    fontSize: 12
+  },
+  selectorButtonSelected: {
+    backgroundColor: map.TAB_BACK_SELECTED_COLOR
+  },
 
   // diff: {
   //   padding: '2px 3px',
@@ -387,8 +358,3 @@ export const createStylingFromTheme = createStyling(getDefaultThemeStyling, {
   defaultBase16: (reduxThemes as any).nicinabox,
   reduxThemes
 });
-
-// export const createStylingFromTheme = createStyling(getStylingFromBase16, {
-//   defaultBase16: inspector,
-//   base16Themes
-// });

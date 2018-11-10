@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Tab, TabName, Action, ActionsDict } from './state';
-import { View, AppState } from 'react-native';
+import { View, AppState, ScrollView } from 'react-native';
 import { ActionPreviewHeader } from './ActionPreviewHeader';
 import { Delta } from 'jsondiffpatch';
 import { ActionTab } from './tabs/ActionTab';
@@ -24,7 +24,7 @@ const DEFAULT_TABS: Tab[] = [
 
 export class ActionPreview extends React.Component<ActionPreviewProps> {
   static defaultProps = {
-    tabName: 'Diff'
+    tabName: 'Action'
   };
 
   render() {
@@ -41,7 +41,9 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
       selectedActionId,
       startActionId,
       computedStates,
-      tabs
+      tabs,
+      base16Theme,
+      styling
     } = this.props;
 
     const renderedTabs =
@@ -58,14 +60,14 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
       TabComponent = tab.component;
     }
     return (
-      <View>
+      <View {...styling('actionPreviewContainer')}>
         <ActionPreviewHeader
           tabs={renderedTabs}
-          {...{ inspectedPath, onInspectPath, tabName, onSelectTab }}
+          {...{ inspectedPath, onInspectPath, tabName, onSelectTab, styling }}
         />
-                {!error &&
-          <View key='actionPreviewContent'>
-            {TabComponent &&
+        {!error && (
+          <ScrollView>
+            {TabComponent && (
               <TabComponent
                 {...{
                   computedStates,
@@ -74,12 +76,14 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
                   startActionId,
                   delta,
                   action,
-                  nextState
+                  nextState,
+                  base16Theme,
+                  styling
                 }}
               />
-            }
-          </View>
-        }
+            )}
+          </ScrollView>
+        )}
       </View>
     );
   }
@@ -99,4 +103,6 @@ interface ActionPreviewProps {
   selectedActionId: number;
   computedStates: AppState[];
   actions: ActionsDict;
+  styling: any;
+  base16Theme: any;
 }

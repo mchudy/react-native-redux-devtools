@@ -1,11 +1,15 @@
 import * as React from 'react';
-import { FlatList, View, StyleSheet } from 'react-native';
+import { FlatList, View } from 'react-native';
 import { ActionListRow } from './ActionListRow';
 import { ActionListHeader } from './ActionListHeader';
-import { Action, ActionsDict } from './state';
+import { ActionsDict } from './state';
 import bind from 'bind-decorator';
 
-function getTimestamps(actions: ActionsDict, actionIds: number[], actionId: number) {
+function getTimestamps(
+  actions: ActionsDict,
+  actionIds: number[],
+  actionId: number
+) {
   const idx = actionIds.indexOf(actionId);
   const prevActionId = actionIds[idx - 1];
 
@@ -37,7 +41,8 @@ export class ActionList extends React.Component<ActionListProps> {
       currentActionId,
       onCommit,
       onSweep,
-      onJumpToState
+      onJumpToState,
+      styling
     } = this.props;
     const lowerSearchValue = searchValue && searchValue.toLowerCase();
     const filteredActionIds = searchValue
@@ -75,14 +80,7 @@ export class ActionList extends React.Component<ActionListProps> {
           // hasStagedActions={actionIds.length > 1}
           />
         }
-        ItemSeparatorComponent={() => (
-          <View
-            style={{
-              backgroundColor: '#b0b0b0',
-              height: StyleSheet.hairlineWidth
-            }}
-          />
-        )}
+        ItemSeparatorComponent={this.renderItemSeparator}
       />
     );
   }
@@ -92,16 +90,27 @@ export class ActionList extends React.Component<ActionListProps> {
   }
 
   @bind
+  private renderItemSeparator() {
+    const { styling } = this.props;
+    return <View {...styling('actionListItemSeparator')} />;
+  }
+
+  @bind
   private renderItem({ item: actionId }: any) {
     return (
       <ActionListRow
         key={actionId}
         isInitAction={!actionId}
         isInFuture={actionId > this.props.currentActionId}
-        timestamps={getTimestamps(this.props.actions, this.props.actionIds, actionId)}
+        timestamps={getTimestamps(
+          this.props.actions,
+          this.props.actionIds,
+          actionId
+        )}
         action={(this.props.actions[actionId] as any).action}
         isSkipped={this.props.skippedActionIds.indexOf(actionId) !== -1}
         isSelected={false}
+        styling={this.props.styling}
       />
     );
   }
@@ -122,4 +131,5 @@ interface ActionListProps {
   onCommit: () => void;
   onSweep: () => void;
   onJumpToState: (actionId: number) => void;
+  styling: any;
 }
