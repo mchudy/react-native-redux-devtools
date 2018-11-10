@@ -667,6 +667,11 @@
   resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-1.0.1.tgz#2e5b235c8c55652c4fec284506d2a36fe65fe87e"
   integrity sha1-LlsjXIxVZSxP7ChFBtKjb+Zf6H4=
 
+"@types/hex-rgba@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/hex-rgba/-/hex-rgba-1.0.0.tgz#b2aed2aa9fdd6152b7f0ac5e3733b974d4eba35a"
+  integrity sha512-u3AGV8fjRsDBqY4wOvVWhVCgKDfh2b0h3mux7KPKU1cm/6mJp14OWBINLgBypeBTM89Nm2j+eKQqIoIe7150DA==
+
 "@types/immutable@^3.8.7":
   version "3.8.7"
   resolved "https://registry.yarnpkg.com/@types/immutable/-/immutable-3.8.7.tgz#536d33d30f3f3d9a6d4642a219419fd82af633fb"
@@ -2839,6 +2844,11 @@ has@^1.0.1:
   dependencies:
     function-bind "^1.1.1"
 
+hex-rgba@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hex-rgba/-/hex-rgba-1.0.2.tgz#b7cfbd24c6c736277cf88dd6d41b672ea336574c"
+  integrity sha512-MKla68wFGv+i7zU3Q4giWN74f+zWdkuf2Tk21fISV7aw55r8dH/noBbH5JsVlM4Z2WRTYCEmSxsoZ1QR/o68jg==
+
 hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
@@ -3309,6 +3319,11 @@ istanbul-reports@^1.5.1:
   integrity sha512-+cfoZ0UXzWjhAdzosCPP3AN8vvef8XDkWtTfgaN+7L3YTpNYITnCaEkceo5SEYy644VkHka/P1FvkWvrG/rrJw==
   dependencies:
     handlebars "^4.0.3"
+
+javascript-stringify@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/javascript-stringify/-/javascript-stringify-1.6.0.tgz#142d111f3a6e3dae8f4a9afd77d45855b5a9cce3"
+  integrity sha1-FC0RHzpuPa6PSpr9d9RYVbWpzOM=
 
 jest-changed-files@^23.4.2:
   version "23.4.2"
@@ -5232,6 +5247,13 @@ redux-devtools-instrument@^1.0.1:
   dependencies:
     lodash "^4.2.0"
     symbol-observable "^1.0.2"
+
+redux-devtools-themes@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/redux-devtools-themes/-/redux-devtools-themes-1.0.0.tgz#c482dce3c5373976045f40134907d9dcb3ae3d5d"
+  integrity sha1-xILc48U3OXYEX0ATSQfZ3LOuPV0=
+  dependencies:
+    base16 "^1.0.0"
 
 redux-devtools@^3.4.1:
   version "3.4.1"

@@ -11,6 +11,8 @@ declare module 'react-native-json-tree' {
         valueRenderer?: any;
         getItemString?: (type: string, data: any) => React.ReactElement;
         shouldExpandNode?: (keyName, data, level) => boolean;
+        postprocessValue?: (value: any) => any;
+        isCustomNode?: any;
     }
 
     export default class JSONTree extends React.Component<JSONTreeProps, any> {

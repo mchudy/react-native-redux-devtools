@@ -13,6 +13,8 @@ const ActionCreators = require('redux-devtools').ActionCreators;
 import bind from 'bind-decorator';
 import getInspectedState from './utils/getInspectedState';
 import { ActionPreview } from './ActionPreview';
+import { createStylingFromTheme, base16Themes } from './utils/createStylingFromTheme';
+const getBase16Theme =  require('react-base16-styling').getBase16Theme;
 
 const CONTAINER_HEIGHT = 250;
 
@@ -104,6 +106,15 @@ function createIntermediateState(
   };
 }
 
+function createThemeState(props: any) {
+  const base16Theme = getBase16Theme(props.theme, base16Themes);
+  console.warn(base16Theme);
+  console.warn(props);
+  const styling = createStylingFromTheme(props.theme);
+  console.warn(styling('inspector').style);
+  return { base16Theme, styling };
+}
+
 export class ReactNativeMonitor extends React.Component<
   ReactNativeMonitorProps,
   ReactNativeMonitorState
@@ -111,13 +122,18 @@ export class ReactNativeMonitor extends React.Component<
   static update = reducer;
   static defaultProps = {
     select: (state: any) => state,
-    supportImmutable: false
+    supportImmutable: false,
+    theme: 'inspector',
+    invertTheme: false
   };
 
   constructor(props: ReactNativeMonitorProps) {
     super(props);
 
-    this.state = createIntermediateState(props, props.monitorState) as any;
+    this.state = {
+      ...createIntermediateState(props, props.monitorState) as any,
+      themeState: createThemeState(props)
+    };
   }
 
   updateMonitorState(monitorState: any) {
@@ -150,6 +166,7 @@ export class ReactNativeMonitor extends React.Component<
       skippedActionIds,
       currentStateIndex,
       monitorState,
+      invertTheme
     } = this.props;
     const {
       selectedActionId,
@@ -159,8 +176,8 @@ export class ReactNativeMonitor extends React.Component<
     } = monitorState;
     // const inspectedPathType =
     //   tabName === 'Action' ? 'inspectedActionPath' : 'inspectedStatePath';
-    const { action, nextState, delta, error } = this.state;
-
+    const { action, nextState, delta, error, themeState } = this.state;
+    const { base16Theme, styling } = themeState;
     return (
       <View style={styles.container}>
         <ActionList
@@ -171,6 +188,7 @@ export class ReactNativeMonitor extends React.Component<
             selectedActionId,
             startActionId
           } as any}
+          styling={styling}
           onSearch={this.handleSearch}
           onToggleAction={() => {}}
           onJumpToState={() => {}}
@@ -182,6 +200,8 @@ export class ReactNativeMonitor extends React.Component<
         />
         <ActionPreview
           {...{
+            base16Theme, 
+            invertTheme,
             delta,
             error,
             nextState,
@@ -215,8 +235,8 @@ type AppState = any;
 
 interface ReactNativeMonitorProps {
   supportImmutable: boolean;
-  // theme: Theme;
-  // invertTheme: boolean;
+  theme: any;
+  invertTheme: boolean;
   dispatch: Dispatch<any>;
   computedStates: AppState[];
   stagedActionIds: number[];
@@ -234,11 +254,10 @@ interface ReactNativeMonitorProps {
 }
 
 export interface ReactNativeMonitorState {
-  // isWideLayout: boolean;
-  // themeState: {
-  //   base16Theme: Base16Theme,
-  //   styling: StylingFunction
-  // };
+  themeState: {
+    base16Theme: any;
+    styling: any;
+  };
   action: Action;
   nextState: Object;
   delta?: Delta;
