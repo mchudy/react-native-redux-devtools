@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { View } from 'react-native';
 import { ActionList } from './ActionList';
-import { Dispatch, Action } from 'redux';
+import { Dispatch } from 'redux';
 import { Delta } from 'jsondiffpatch';
 import createDiffPatcher, {
   PropertyFilter,
   ObjectHash
 } from './createDiffPatcher';
-import { MonitorState, Tab, TabName } from './state';
+import { MonitorState, Tab, TabName, ActionsDict, Action } from './state';
 import { reducer, updateMonitorState } from './redux';
 const ActionCreators = require('redux-devtools').ActionCreators;
 import bind from 'bind-decorator';
@@ -185,13 +185,14 @@ export class ReactNativeMonitor extends React.Component<
             searchValue,
             selectedActionId,
             startActionId
-          } as any}
+          }}
           styling={styling}
           onSearch={this.handleSearch}
-          onToggleAction={() => {}}
-          onJumpToState={() => {}}
-          onCommit={() => {}}
-          onSweep={() => {}}
+          onToggleAction={this.handleToggleAction}
+          onJumpToState={this.handleJumpToState}
+          onCommit={this.handleCommit}
+          onSweep={this.handleSweep}
+          onSelect={this.handleSelectAction}
           skippedActionIds={skippedActionIds}
           currentActionId={actionIds[currentStateIndex]}
           lastActionId={getLastActionId(this.props)}
@@ -210,7 +211,7 @@ export class ReactNativeMonitor extends React.Component<
             startActionId,
             tabName,
             styling
-          } as any}
+          }}
           onInspectPath={() => null}
           inspectedPath={[]}
           onSelectTab={this.handleSelectTab}
@@ -228,6 +229,50 @@ export class ReactNativeMonitor extends React.Component<
   private handleSelectTab(tabName: TabName) {
     this.updateMonitorState({ tabName });
   }
+
+  @bind
+  private handleCommit() {
+    this.props.dispatch(commit());
+  }
+
+  @bind
+  private handleSweep() {
+    this.props.dispatch(sweep());
+  }
+
+  @bind
+  private handleToggleAction(actionId: number) {
+    this.props.dispatch(toggleAction(actionId));
+  };
+
+  @bind
+  private handleJumpToState(actionId: number) {
+    if (jumpToAction) {
+      this.props.dispatch(jumpToAction(actionId));
+    } else { // Fallback for redux-devtools-instrument < 1.5
+      const index = this.props.stagedActionIds.indexOf(actionId);
+      if (index !== -1) this.props.dispatch(jumpToState(index));
+    }
+  };
+
+  @bind
+  private handleSelectAction(actionId: number) {
+    const { monitorState } = this.props;
+    let startActionId;
+    let selectedActionId;
+
+    startActionId = null;
+    if (
+      actionId === monitorState.selectedActionId ||
+      monitorState.startActionId !== null
+    ) {
+      selectedActionId = null;
+    } else {
+      selectedActionId = actionId;
+    }
+
+    this.updateMonitorState({ startActionId, selectedActionId });
+  }
 }
 
 type AppState = any;
@@ -240,9 +285,7 @@ interface ReactNativeMonitorProps {
   computedStates: AppState[];
   stagedActionIds: number[];
   skippedActionIds: number[];
-  actionsById: {
-    [id: number]: Action;
-  };
+  actionsById: ActionsDict;
   currentStateIndex: number;
   monitorState: MonitorState;
   preserveScrollTop: boolean;

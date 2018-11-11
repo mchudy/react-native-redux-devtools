@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { FlatList, View } from 'react-native';
 import { ActionListRow } from './ActionListRow';
-import { ActionListHeader } from './ActionListHeader';
 import { ActionsDict } from './state';
 import bind from 'bind-decorator';
+import { ActionListHeader } from './ActionListHeader';
 
 function getTimestamps(
   actions: ActionsDict,
@@ -54,39 +54,29 @@ export class ActionList extends React.Component<ActionListProps> {
         )
       : actionIds;
 
-    // const { onSearch, onCommit, onSweep, skippedActionIds, actionIds } = this.props;
-
-    // this.baseTime = this.props.actionsById[
-    //   this.props.stagedActionIds[0]
-    // ].timestamp;
-    // const actions = this.props.stagedActionIds.map((id: any) => ({
-    //   ...this.props.actionsById[id],
-    //   id
-    // }));
-
     return (
-      <FlatList
-        style={{flex: 1}}
-        data={filteredActionIds}
-        renderItem={this.renderItem}
-        ref={(ref: any) => (this.flatListRef = ref)}
-        keyExtractor={this.keyExtractor}
-        ListHeaderComponent={
-          <ActionListHeader
-
-          // onSearch={onSearch}
-          // onCommit={onCommit}
-          // onSweep={onSweep}
-          // hasSkippedActions={skippedActionIds.length > 0}
-          // hasStagedActions={actionIds.length > 1}
-          />
-        }
-        ItemSeparatorComponent={this.renderItemSeparator}
-      />
+      <View>
+        <ActionListHeader
+          styling={styling}
+          onSearch={onSearch}
+          onCommit={onCommit}
+          onSweep={onSweep}
+          hasSkippedActions={skippedActionIds.length > 0}
+          hasStagedActions={actionIds.length > 1}
+        />
+        <FlatList
+          style={{ flex: 1 }}
+          data={filteredActionIds}
+          keyExtractor={this.keyExtractor}
+          renderItem={this.renderItem}
+          ref={(ref: any) => (this.flatListRef = ref)}
+          ItemSeparatorComponent={this.renderItemSeparator}
+        />
+      </View>
     );
   }
 
-  private keyExtractor(item: any) {
+  private keyExtractor(item: number) {
     return item.toString();
   }
 
@@ -98,9 +88,17 @@ export class ActionList extends React.Component<ActionListProps> {
 
   @bind
   private renderItem({ item: actionId }: any) {
+    const { startActionId, selectedActionId } = this.props;
+    const isSelected =
+      (startActionId !== null &&
+        actionId >= startActionId &&
+        actionId <= selectedActionId!) ||
+      actionId === selectedActionId;
+
     return (
       <ActionListRow
         key={actionId}
+        actionId={actionId}
         isInitAction={!actionId}
         isInFuture={actionId > this.props.currentActionId}
         timestamps={getTimestamps(
@@ -110,8 +108,11 @@ export class ActionList extends React.Component<ActionListProps> {
         )}
         action={(this.props.actions[actionId] as any).action}
         isSkipped={this.props.skippedActionIds.indexOf(actionId) !== -1}
-        isSelected={false}
+        isSelected={isSelected}
         styling={this.props.styling}
+        onSelect={this.props.onSelect}
+        onJumpClick={this.props.onJumpToState}
+        onToggleClick={this.props.onToggleAction}
       />
     );
   }
@@ -121,16 +122,16 @@ interface ActionListProps {
   actions: ActionsDict;
   actionIds: number[];
   lastActionId: number;
-  onToggleAction: (actionId: number) => void;
   skippedActionIds: number[];
   selectedActionId: number | null;
   startActionId: null | number;
-  // onSelect: (e: SyntheticMouseEvent, actionId: number) => void;
-  onSearch: (searchStr: string) => void;
   searchValue?: string;
   currentActionId: number;
+  onSearch: (searchStr: string) => void;
   onCommit: () => void;
   onSweep: () => void;
+  onToggleAction: (actionId: number) => void;
   onJumpToState: (actionId: number) => void;
+  onSelect: (actionId: number) => void;
   styling: any;
 }

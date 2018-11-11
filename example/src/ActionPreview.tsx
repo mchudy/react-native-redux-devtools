@@ -127,8 +127,8 @@ interface ActionPreviewProps {
   onSelectTab: (tabName: TabName) => void;
   nextState: Object;
   action: Action;
-  startActionId: number;
-  selectedActionId: number;
+  startActionId: number | null;
+  selectedActionId: number | null;
   computedStates: AppState[];
   actions: ActionsDict;
   styling: any;

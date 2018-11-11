@@ -70,17 +70,17 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     alignItems: 'center'
   },
 
-  // actionListItemSelected: {
-  //   'background-color': map.SELECTED_BACKGROUND_COLOR
-  // },
+  actionListItemSelected: {
+    backgroundColor: map.SELECTED_BACKGROUND_COLOR
+  },
 
-  // actionListItemSkipped: {
-  //   'background-color': map.SKIPPED_BACKGROUND_COLOR
-  // },
+  actionListItemSkipped: {
+    backgroundColor: map.SKIPPED_BACKGROUND_COLOR
+  },
 
-  // actionListFromFuture: {
-  //   opacity: '0.6'
-  // },
+  actionListFromFuture: {
+    opacity: 0.6
+  },
 
   // actionListItemButtons: {
   //   position: 'relative',
@@ -100,9 +100,9 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   //   color: map.ACTION_TIME_COLOR
   // },
 
-  // actionListItemSelector: {
-  //   display: 'inline-flex'
-  // },
+  actionListItemSelector: {
+    flexDirection: 'row'
+  },
 
   actionListItemName: {
     color: map.TEXT_COLOR,
@@ -127,10 +127,10 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     flex: 1
   },
 
-  // actionListItemNameSkipped: {
-  //   'text-decoration': 'line-through',
-  //   opacity: 0.3
-  // },
+  actionListItemNameSkipped: {
+    textDecorationLine: 'line-through',
+    opacity: 0.5
+  },
 
   // actionListHeaderSearch: {
   //   outline: 'none',
@@ -248,8 +248,19 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     fontSize: 12
   },
 
+  selectorButtonTextSmall: {
+    fontFamily: MONOSPACE_FONT,
+    color: map.TEXT_COLOR,
+    fontSize: 10
+  },
+
   selectorButtonSelected: {
     backgroundColor: map.TAB_BACK_SELECTED_COLOR
+  },
+
+  selectorButtonSmall: {
+    paddingHorizontal: 5,
+    paddingVertical: 2
   },
 
   diffWrap: {
