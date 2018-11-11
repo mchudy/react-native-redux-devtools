@@ -44,20 +44,6 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     height: StyleSheet.hairlineWidth
   },
 
-  // actionList: {
-  //   'flex-basis': '40%',
-  //   'flex-shrink': 0,
-  //   'overflow-x': 'hidden',
-  //   'overflow-y': 'auto',
-  //   'border-bottom-width': '3px',
-  //   'border-bottom-style': 'double',
-  //   display: 'flex',
-  //   'flex-direction': 'column',
-
-  //   'background-color': map.BACKGROUND_COLOR,
-  //   'border-color': map.LIST_BORDER_COLOR
-  // },
-
   // actionListHeader: {
   //   display: 'flex',
   //   flex: '0 0 auto',
@@ -171,44 +157,18 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   //   height: '20px'
   // },
 
-  // actionPreview: {
-  //   flex: 1,
-  //   display: 'flex',
-  //   'flex-direction': 'column',
-  //   'flex-grow': 1,
-  //   'overflow-y': 'hidden',
-
-  //   '& pre': {
-  //     border: 'inherit',
-  //     'border-radius': '3px',
-  //     'line-height': 'inherit',
-  //     color: 'inherit'
-  //   },
-
-  //   'background-color': map.BACKGROUND_COLOR,
-  // },
-
-  // actionPreviewContent: {
-  //   flex: 1,
-  //   'overflow-y': 'auto'
-  // },
-
-  // stateDiff: {
-  //   padding: '5px 0'
-  // },
-
   stateDiffEmpty: {
     padding: 10,
     color: map.TEXT_PLACEHOLDER_COLOR
   },
 
-  // stateError: {
-  //   padding: '10px',
-  //   'margin-left': '14px',
-  //   'font-weight': 'bold',
-
-  //   color: map.ERROR_COLOR
-  // },
+  stateError: {
+    padding: 10,
+    fontFamily: MONOSPACE_FONT,
+    fontWeight: 500,
+    marginLeft: 14,
+    color: map.ERROR_COLOR
+  },
 
   // inspectedPath: {
   //   padding: '6px 0'
@@ -287,17 +247,10 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     color: map.TEXT_COLOR,
     fontSize: 12
   },
+
   selectorButtonSelected: {
     backgroundColor: map.TAB_BACK_SELECTED_COLOR
   },
-
-  // diff: {
-  //   padding: '2px 3px',
-  //   'border-radius': '3px',
-  //   position: 'relative',
-
-  //   color: map.TEXT_COLOR
-  // },
 
   diffWrap: {
     position: 'relative',
@@ -333,30 +286,7 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   diffUpdateArrow: {
     fontFamily: MONOSPACE_FONT,
     color: map.DIFF_ARROW_COLOR
-  },
-
-  // rightSlider: {
-  //   'font-smoothing': 'subpixel-antialiased', // http://stackoverflow.com/a/21136111/4218591
-  //   position: 'absolute',
-  //   right: 0,
-  //   transform: 'translateX(150%)',
-  //   transition: 'transform 0.2s ease-in-out'
-  // },
-
-  // rightSliderRotate: {
-  //   transform: 'rotateX(90deg)',
-  //   transition: 'transform 0.2s ease-in-out 0.08s'
-  // },
-
-  // rightSliderShown: {
-  //   position: 'static',
-  //   transform: 'translateX(0)',
-  // },
-
-  // rightSliderRotateShown: {
-  //   transform: 'rotateX(0)',
-  //   transition: 'transform 0.2s ease-in-out 0.18s'
-  // }
+  }
 });
 
 

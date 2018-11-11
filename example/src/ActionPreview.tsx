@@ -86,6 +86,9 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
             )}
           </ScrollView>
         )}
+        {error &&
+          <Text {...styling('stateError')}>{error}</Text>
+        }
       </View>
     );
   }
