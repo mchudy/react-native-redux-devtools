@@ -55,24 +55,24 @@ export class ActionList extends React.Component<ActionListProps> {
       : actionIds;
 
     return (
-      <View>
-        <ActionListHeader
-          styling={styling}
-          onSearch={onSearch}
-          onCommit={onCommit}
-          onSweep={onSweep}
-          hasSkippedActions={skippedActionIds.length > 0}
-          hasStagedActions={actionIds.length > 1}
-        />
-        <FlatList
-          style={{ flex: 1 }}
-          data={filteredActionIds}
-          keyExtractor={this.keyExtractor}
-          renderItem={this.renderItem}
-          ref={(ref: any) => (this.flatListRef = ref)}
-          ItemSeparatorComponent={this.renderItemSeparator}
-        />
-      </View>
+      <FlatList
+        style={{ flex: 1 }}
+        data={filteredActionIds}
+        keyExtractor={this.keyExtractor}
+        renderItem={this.renderItem}
+        ref={(ref: any) => (this.flatListRef = ref)}
+        ItemSeparatorComponent={this.renderItemSeparator}
+        ListHeaderComponent={
+          <ActionListHeader
+            styling={styling}
+            onSearch={onSearch}
+            onCommit={onCommit}
+            onSweep={onSweep}
+            hasSkippedActions={skippedActionIds.length > 0}
+            hasStagedActions={actionIds.length > 1}
+          />
+        }
+      />
     );
   }
 

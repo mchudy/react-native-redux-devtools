@@ -44,24 +44,26 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     height: StyleSheet.hairlineWidth
   },
 
-  // actionListHeader: {
-  //   display: 'flex',
-  //   flex: '0 0 auto',
-  //   'align-items': 'center',
-  //   'border-bottom-width': '1px',
-  //   'border-bottom-style': 'solid',
-
-  //   'border-color': map.LIST_BORDER_COLOR
-  // },
+  actionListHeader: {
+    paddingHorizontal: 5,
+    paddingVertical: 2,
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: map.LIST_BORDER_COLOR
+  },
 
   // actionListRows: {
   //   overflow: 'auto'
   // },
 
-  // actionListHeaderSelector: {
-  //   display: 'inline-flex',
-  //   'margin-right': '10px'
-  // },
+  actionListHeaderSelector: {
+    marginRight: 10
+  },
+
+  actionListHeaderPlaceholder: {
+    color: map.TEXT_PLACEHOLDER_COLOR
+  },
 
   actionListItem: {
     paddingHorizontal: 5,
@@ -132,30 +134,13 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     opacity: 0.5
   },
 
-  // actionListHeaderSearch: {
-  //   outline: 'none',
-  //   border: 'none',
-  //   width: '100%',
-  //   padding: '5px 10px',
-  //   'font-size': '1em',
-  //   'font-family': 'monaco, Consolas, "Lucida Console", monospace',
-
-  //   'background-color': map.BACKGROUND_COLOR,
-  //   color: map.TEXT_COLOR,
-
-  //   '&::-webkit-input-placeholder': {
-  //     color: map.TEXT_PLACEHOLDER_COLOR
-  //   },
-
-  //   '&::-moz-placeholder': {
-  //     color: map.TEXT_PLACEHOLDER_COLOR
-  //   }
-  // },
-
-  // actionListHeaderWrapper: {
-  //   position: 'relative',
-  //   height: '20px'
-  // },
+  actionListHeaderSearch: {
+    padding: 2,
+    fontSize: 12,
+    fontFamily: MONOSPACE_FONT,
+    backgroundColor: map.BACKGROUND_COLOR,
+    color: map.TEXT_COLOR
+  },
 
   stateDiffEmpty: {
     padding: 10,

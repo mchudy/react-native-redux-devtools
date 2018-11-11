@@ -18,11 +18,7 @@ yarn add react-native-redux-devtools
 ### Usage
 
 ```js
-import React from 'react';
-import { createDevTools } from 'redux-devtools';
-import Inspector from 'redux-devtools-inspector';
 
-export default createDevTools(
-  <Inspector />
-);
 ```
+
+More details on how to set up devtools can be found in [redux-devtools documentation](https://github.com/reduxjs/redux-devtools/blob/master/docs/Walkthrough.md).
