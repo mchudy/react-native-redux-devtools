@@ -1,8 +1,8 @@
-import { ReduxState, MonitorState } from "./state";
+import { ReduxState, MonitorState } from './state';
 
 type Action = {
-  type: string,
-  [key: string]: any
+  type: string;
+  [key: string]: any;
 };
 
 const UPDATE_MONITOR_STATE = '@@redux-devtools-inspector/UPDATE_MONITOR_STATE';
@@ -20,13 +20,19 @@ export function updateMonitorState(monitorState: MonitorState) {
 }
 
 function reduceUpdateState(state: ReduxState, action: Action) {
-  return (action.type === UPDATE_MONITOR_STATE) ? {
-    ...state,
-    ...action.monitorState
-  } : state;
+  return action.type === UPDATE_MONITOR_STATE
+    ? {
+        ...state,
+        ...action.monitorState
+      }
+    : state;
 }
 
-export function reducer(_props: Object, state: ReduxState=DEFAULT_STATE, action: Action) {
+export function reducer(
+  _props: Object,
+  state: ReduxState = DEFAULT_STATE,
+  action: Action
+) {
   return {
     ...reduceUpdateState(state, action)
   };

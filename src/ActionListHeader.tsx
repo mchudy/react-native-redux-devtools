@@ -8,10 +8,9 @@ export class ActionListHeader extends React.Component<ActionListHeaderProps> {
       styling,
       onSearch,
       hasSkippedActions,
-      hasStagedActions,
-      onCommit,
-      onSweep
+      hasStagedActions
     } = this.props;
+
     return (
       <View {...styling('actionListHeader')}>
         <TextInput
@@ -23,7 +22,7 @@ export class ActionListHeader extends React.Component<ActionListHeaderProps> {
           }
         />
         {!!hasStagedActions && (
-          <View style={{ flexDirection: 'row' }}>
+          <View {...styling('actionListHeaderButtonContainer')}>
             {!!hasSkippedActions &&
               this.renderButton(Button.SWEEP, ['selectorButtonFirst'])}
             {this.renderButton(Button.COMMIT, [
@@ -59,11 +58,6 @@ export class ActionListHeader extends React.Component<ActionListHeaderProps> {
     }
   }
 }
-
-const getActiveButtons = (hasSkippedActions: boolean): Button[] =>
-  [hasSkippedActions ? Button.SWEEP : null, Button.COMMIT].filter(
-    Boolean
-  ) as Button[];
 
 enum Button {
   SWEEP = 'Sweep',

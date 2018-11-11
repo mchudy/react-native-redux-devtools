@@ -3,8 +3,6 @@ import { TabName, Tab } from './state';
 import { View, Text, TouchableOpacity } from 'react-native';
 
 export const ActionPreviewHeader = ({
-  inspectedPath,
-  onInspectPath,
   tabName,
   onSelectTab,
   tabs,
@@ -32,8 +30,6 @@ export const ActionPreviewHeader = ({
 );
 
 interface ActionPreviewHeaderProps {
-  inspectedPath: string[];
-  onInspectPath: (path: string[]) => void;
   tabName: TabName;
   onSelectTab: (tabName: TabName) => void;
   tabs: Tab[];

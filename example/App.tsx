@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { actions } from './src/actions';
 import { connect, Provider } from 'react-redux';
 import { store } from './src/store';
-import DevTools from './src/DevTools';
+import { DevTools } from 'react-native-redux-devtools';
 
 export default class Root extends React.Component {
   render() {

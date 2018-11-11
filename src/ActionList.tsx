@@ -32,16 +32,11 @@ export class ActionList extends React.Component<ActionListProps> {
     const {
       actions,
       actionIds,
-      onToggleAction,
       skippedActionIds,
-      selectedActionId,
-      startActionId,
       onSearch,
       searchValue,
-      currentActionId,
       onCommit,
       onSweep,
-      onJumpToState,
       styling
     } = this.props;
     const lowerSearchValue = searchValue && searchValue.toLowerCase();

@@ -33,8 +33,6 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
       delta,
       error,
       nextState,
-      onInspectPath,
-      inspectedPath,
       tabName,
       onSelectTab,
       action,
@@ -64,7 +62,7 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
       <View {...styling('actionPreviewContainer')}>
         <ActionPreviewHeader
           tabs={renderedTabs}
-          {...{ inspectedPath, onInspectPath, tabName, onSelectTab, styling }}
+          {...{ tabName, onSelectTab, styling }}
         />
         {!error && (
           <ScrollView>
@@ -86,31 +84,22 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
             )}
           </ScrollView>
         )}
-        {error &&
-          <Text {...styling('stateError')}>{error}</Text>
-        }
+        {error && <Text {...styling('stateError')}>{error}</Text>}
       </View>
     );
   }
 
   @bind
   private labelRenderer(
-    [key, ...rest]: any,
-    nodeType: string,
+    [key, ..._rest]: any,
+    _nodeType: string,
     expanded: boolean
   ) {
-    const { styling, onInspectPath, inspectedPath } = this.props;
+    const { styling } = this.props;
 
     return (
       <Text>
         <Text {...styling('treeItemKey')}>{key}</Text>
-        {/* <span {...styling('treeItemPin')}
-              onClick={() => onInspectPath([
-                ...inspectedPath.slice(0, inspectedPath.length - 1),
-                ...[key, ...rest].reverse()
-              ])}>
-          {'(pin)'}
-        </span> */}
         {!expanded && ': '}
       </Text>
     );
@@ -120,8 +109,6 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
 interface ActionPreviewProps {
   tabs?: ((defaultTabs: Tab[]) => Tab[]) | Tab[];
   tabName: TabName;
-  inspectedPath: string[];
-  onInspectPath: (path: string[]) => void;
   delta?: Delta;
   error?: string;
   onSelectTab: (tabName: TabName) => void;

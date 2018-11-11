@@ -45,6 +45,7 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   },
 
   actionListHeader: {
+    justifyContent: 'space-between',
     paddingHorizontal: 5,
     paddingVertical: 2,
     alignItems: 'center',
@@ -53,9 +54,9 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     borderBottomColor: map.LIST_BORDER_COLOR
   },
 
-  // actionListRows: {
-  //   overflow: 'auto'
-  // },
+  actionListHeaderButtonContainer: {
+    flexDirection: 'row'
+  },
 
   actionListHeaderSelector: {
     marginRight: 10
@@ -83,24 +84,6 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   actionListFromFuture: {
     opacity: 0.6
   },
-
-  // actionListItemButtons: {
-  //   position: 'relative',
-  //   height: '20px',
-  //   display: 'flex'
-  // },
-
-  // actionListItemTime: {
-  //   display: 'inline',
-  //   padding: '4px 6px',
-  //   'border-radius': '3px',
-  //   'font-size': '0.8em',
-  //   'line-height': '1em',
-  //   'flex-shrink': 0,
-
-  //   'background-color': map.ACTION_TIME_BACK_COLOR,
-  //   color: map.ACTION_TIME_COLOR
-  // },
 
   actionListItemSelector: {
     flexDirection: 'row'
@@ -154,43 +137,6 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     marginLeft: 14,
     color: map.ERROR_COLOR
   },
-
-  // inspectedPath: {
-  //   padding: '6px 0'
-  // },
-
-  // inspectedPathKey: {
-  //   '&:not(:last-child):after': {
-  //     content: '" > "'
-  //   }
-  // },
-
-  // inspectedPathKeyLink: {
-  //   cursor: 'pointer',
-  //   '&:hover': {
-  //     'text-decoration': 'underline'
-  //   },
-
-  //   color: map.LINK_COLOR,
-  //   // '&:hover': {
-  //   //   color: map.LINK_HOVER_COLOR
-  //   // }
-  // },
-
-  // treeItemPin: {
-  //   'font-size': '0.7em',
-  //   'padding-left': '5px',
-  //   cursor: 'pointer',
-  //   '&:hover': {
-  //     'text-decoration': 'underline'
-  //   },
-
-  //   color: map.PIN_COLOR
-  // },
-
-  // treeItemHint: {
-  //   color: map.ITEM_HINT_COLOR
-  // },
 
   treeItemKey: {
     fontFamily: MONOSPACE_FONT,

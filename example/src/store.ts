@@ -1,6 +1,6 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 import reducer from './reducer';
-import DevTools from './DevTools';
+import { DevTools } from 'react-native-redux-devtools';
 
 const enhancer = compose(
     applyMiddleware(),

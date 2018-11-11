@@ -32,7 +32,7 @@ export class ActionListRow extends React.Component<
     } = this.props;
     const timeDelta = timestamps.current - timestamps.previous;
     const showButtons = (this.state.showButtons && !isInitAction) || isSkipped;
-    console.warn(isInFuture);
+
     let actionType = action.type;
     if (typeof actionType === 'undefined') {
       actionType = '<UNDEFINED>';
