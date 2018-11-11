@@ -7,7 +7,7 @@ Redux DevTools implementation for React Native based on [redux-devtools-inspecto
 
 For now, it's mostly a one-to-one port adjusted for mobile. Some features might be missing but I plan to implement in the future.
 
-![](https://raw.githubusercontent.com/mchudy/react-native-redux-devtools/master/screenshots/counter.png)
+![](https://github.com/mchudy/react-native-redux-devtools/blob/master/screenshots/counter.png?raw=true)
 
 ### Installation
 ```
