@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@types/dateformat@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-1.0.1.tgz#2e5b235c8c55652c4fec284506d2a36fe65fe87e"
+  integrity sha1-LlsjXIxVZSxP7ChFBtKjb+Zf6H4=
+
 "@types/hex-rgba@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/hex-rgba/-/hex-rgba-1.0.0.tgz#b2aed2aa9fdd6152b7f0ac5e3733b974d4eba35a"
@@ -27,6 +32,14 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@types/redux-devtools@^3.0.44":
+  version "3.0.44"
+  resolved "https://registry.yarnpkg.com/@types/redux-devtools/-/redux-devtools-3.0.44.tgz#2781b87067b8aec3102d4cb4a478feb340df5259"
+  integrity sha512-FzLlfbx35XjYSY3lboIGwU/8dkwHoeFhxFxVz2KVgExH6eQNJUtFQ3W54tSrn/6mRHKDs/XFleaKhIXjrflTtA==
+  dependencies:
+    "@types/react" "*"
+    redux "^3.6.0"
 
 almost-equal@^1.1.0:
   version "1.1.0"
@@ -141,6 +154,11 @@ jsondiffpatch@^0.3.11:
     chalk "^2.3.0"
     diff-match-patch "^1.0.0"
 
+lodash-es@^4.2.1:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
+  integrity sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q==
+
 lodash.curry@^4.0.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.curry/-/lodash.curry-4.1.1.tgz#248e36072ede906501d75966200a86dab8b23170"
@@ -151,12 +169,12 @@ lodash.flow@^3.3.0:
   resolved "https://registry.yarnpkg.com/lodash.flow/-/lodash.flow-3.5.0.tgz#87bf40292b8cf83e4e8ce1a3ae4209e20071675a"
   integrity sha1-h79AKSuM+D5OjOGjrkIJ4gBxZ1o=
 
-lodash@^4.2.0:
+lodash@^4.2.0, lodash@^4.2.1:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
 
-loose-envify@^1.3.1, loose-envify@^1.4.0:
+loose-envify@^1.1.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -240,6 +258,16 @@ redux-devtools@^3.4.1:
     prop-types "^15.5.7"
     redux-devtools-instrument "^1.0.1"
 
+redux@^3.6.0:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
+  integrity sha512-pNqnf9q1hI5HHZRBkj3bAngGZW/JMCmexDlOxw4XagXY2o1327nHH54LoTjiPJ0gizoqPDRqWyX/00g0hD6w+A==
+  dependencies:
+    lodash "^4.2.1"
+    lodash-es "^4.2.1"
+    loose-envify "^1.1.0"
+    symbol-observable "^1.0.3"
+
 redux@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/redux/-/redux-4.0.1.tgz#436cae6cc40fbe4727689d7c8fae44808f1bfef5"
@@ -255,7 +283,7 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-symbol-observable@^1.0.2, symbol-observable@^1.2.0:
+symbol-observable@^1.0.2, symbol-observable@^1.0.3, symbol-observable@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
   integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
