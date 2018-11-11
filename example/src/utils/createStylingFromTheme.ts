@@ -28,7 +28,7 @@ const colorMap = (theme: any) => ({
   DIFF_ARROW_COLOR: theme.base0E,
   LINK_COLOR: rgba(theme.base0E, 90),
   LINK_HOVER_COLOR: theme.base0E,
-  ERROR_COLOR: theme.base08,
+  ERROR_COLOR: theme.base08
 });
 
 const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
@@ -165,7 +165,7 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   stateError: {
     padding: 10,
     fontFamily: MONOSPACE_FONT,
-    fontWeight: 500,
+    fontWeight: 'bold',
     marginLeft: 14,
     color: map.ERROR_COLOR
   },
@@ -253,7 +253,6 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   },
 
   diffWrap: {
-    position: 'relative',
     zIndex: 1
   },
 
@@ -288,7 +287,6 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
     color: map.DIFF_ARROW_COLOR
   }
 });
-
 
 const getDefaultThemeStyling = (theme: string) => {
   const themeSheet = getSheetFromColorMap(colorMap(theme));
