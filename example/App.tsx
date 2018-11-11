@@ -41,7 +41,7 @@ class App extends React.Component<AppProps> {
             </TouchableHighlight>
           </View>
         </View>
-        <View style={{ height: 250 }}>
+        <View style={styles.devToolsContainer}>
           <DevTools />
         </View>
       </View>
@@ -101,5 +101,8 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlign: 'center',
     color: '#3c3c3c'
+  },
+  devToolsContainer: {
+    height: 280
   }
 });

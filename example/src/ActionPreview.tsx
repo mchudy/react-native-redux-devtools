@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Tab, TabName, Action, ActionsDict } from './state';
-import { View, AppState, ScrollView } from 'react-native';
+import { View, AppState, ScrollView, Text } from 'react-native';
 import { ActionPreviewHeader } from './ActionPreviewHeader';
 import { Delta } from 'jsondiffpatch';
 import { ActionTab } from './tabs/ActionTab';
 import { StateTab } from './tabs/StateTab';
 import { DiffTab } from './tabs/DiffTab';
+import bind from 'bind-decorator';
 
 const DEFAULT_TABS: Tab[] = [
   {
@@ -69,6 +70,7 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
           <ScrollView>
             {TabComponent && (
               <TabComponent
+                labelRenderer={this.labelRenderer}
                 {...{
                   computedStates,
                   actions,
@@ -85,6 +87,29 @@ export class ActionPreview extends React.Component<ActionPreviewProps> {
           </ScrollView>
         )}
       </View>
+    );
+  }
+
+  @bind
+  private labelRenderer(
+    [key, ...rest]: any,
+    nodeType: string,
+    expanded: boolean
+  ) {
+    const { styling, onInspectPath, inspectedPath } = this.props;
+
+    return (
+      <Text>
+        <Text {...styling('treeItemKey')}>{key}</Text>
+        {/* <span {...styling('treeItemPin')}
+              onClick={() => onInspectPath([
+                ...inspectedPath.slice(0, inspectedPath.length - 1),
+                ...[key, ...rest].reverse()
+              ])}>
+          {'(pin)'}
+        </span> */}
+        {!expanded && ': '}
+      </Text>
     );
   }
 }

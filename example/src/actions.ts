@@ -7,8 +7,8 @@ export const actions = {
     increment: () => ({
         type: ActionTypes.INCREMENT,
         payload: {
-            a: '1',
-            b: '2'
+            a: 1,
+            b: true
         }
     }),
     decrement: () => ({

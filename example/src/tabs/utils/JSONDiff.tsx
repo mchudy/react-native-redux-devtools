@@ -2,6 +2,8 @@ import * as React from 'react';
 import { Delta } from 'jsondiffpatch';
 import JSONTree from 'react-native-json-tree';
 import getItemString from './getItemString';
+import { Text } from 'react-native';
+import bind from 'bind-decorator';
 const stringify = require('javascript-stringify');
 
 function stringifyAndShrink(val: any): string {
@@ -46,15 +48,24 @@ function prepareDelta(value: Delta): Delta {
 
 export class JSONDiff extends React.PureComponent<JSONDiffProps> {
   render() {
-    const { delta } = this.props;
+    const { styling, delta, labelRenderer, base16Theme } = this.props;
+
+    if (!delta) {
+      return (
+        <Text {...styling('stateDiffEmpty')}>
+          (states are equal)
+        </Text>
+      );
+    }
+
     return (
         <JSONTree
-        //   labelRenderer={labelRenderer}
+          labelRenderer={labelRenderer}
           invertTheme={false}
-          theme={{}}
+          theme={base16Theme}
           data={delta}
           getItemString={getItemString}
-          // valueRenderer={this.valueRenderer}
+          valueRenderer={this.valueRenderer}
           postprocessValue={prepareDelta}
           isCustomNode={Array.isArray}
           shouldExpandNode={expandFirstLevel}
@@ -63,42 +74,48 @@ export class JSONDiff extends React.PureComponent<JSONDiffProps> {
     );
   }
 
-  // valueRenderer = (raw: React.ReactElement<any>, value: any): React.ReactElement<any> => {
-  //   function renderSpan(name: string, body) {
-  //     return (
-  //       <span key={name} {...styling(['diff', name])}>{body}</span>
-  //     );
-  //   }
+  @bind
+  private valueRenderer(raw: React.ReactElement<any>, value: any): React.ReactElement<any> {
+    const { styling } = this.props;
 
-  //   if (Array.isArray(value)) {
-  //     switch(value.length) {
-  //     case 1:
-  //       return (
-  //         <span {...styling('diffWrap')}>
-  //           {renderSpan('diffAdd', stringifyAndShrink(value[0], isWideLayout))}
-  //         </span>
-  //       );
-  //     case 2:
-  //       return (
-  //         <span {...styling('diffWrap')}>
-  //           {renderSpan('diffUpdateFrom', stringifyAndShrink(value[0], isWideLayout))}
-  //           {renderSpan('diffUpdateArrow', ' => ')}
-  //           {renderSpan('diffUpdateTo', stringifyAndShrink(value[1], isWideLayout))}
-  //         </span>
-  //       );
-  //     case 3:
-  //       return (
-  //         <span {...styling('diffWrap')}>
-  //           {renderSpan('diffRemove', stringifyAndShrink(value[0], isWideLayout))}
-  //         </span>
-  //       );
-  //     }
-  //   }
+    function renderSpan(name: string, body: any) {
+      return (
+        <Text key={name} {...styling(['diff', name])}>{body}</Text>
+      );
+    }
 
-  //   return raw;
-  // }
+    if (Array.isArray(value)) {
+      switch(value.length) {
+      case 1:
+        return (
+          <Text {...styling('diffWrap')}>
+            {renderSpan('diffAdd', stringifyAndShrink(value[0]))}
+          </Text>
+        );
+      case 2:
+        return (
+          <Text {...styling('diffWrap')}>
+            {renderSpan('diffUpdateFrom', stringifyAndShrink(value[0]))}
+            {renderSpan('diffUpdateArrow', ' => ')}
+            {renderSpan('diffUpdateTo', stringifyAndShrink(value[1]))}
+          </Text>
+        );
+      case 3:
+        return (
+          <Text {...styling('diffWrap')}>
+            {renderSpan('diffRemove', stringifyAndShrink(value[0]))}
+          </Text>
+        );
+      }
+    }
+
+    return raw;
+  }
 }
 
 interface JSONDiffProps {
   delta: Delta;
+  labelRenderer: any;
+  styling: any;
+  base16Theme: any;
 }

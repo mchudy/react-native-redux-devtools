@@ -66,6 +66,7 @@ export class ActionList extends React.Component<ActionListProps> {
 
     return (
       <FlatList
+        style={{flex: 1}}
         data={filteredActionIds}
         renderItem={this.renderItem}
         ref={(ref: any) => (this.flatListRef = ref)}

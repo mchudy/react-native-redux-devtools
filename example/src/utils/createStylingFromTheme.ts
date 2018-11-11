@@ -138,7 +138,7 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   },
 
   actionPreviewContainer: {
-    minHeight: 150
+    flex: 1
   },
 
   // actionListItemNameSkipped: {
@@ -197,11 +197,10 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   //   padding: '5px 0'
   // },
 
-  // stateDiffEmpty: {
-  //   padding: '10px',
-
-  //   color: map.TEXT_PLACEHOLDER_COLOR
-  // },
+  stateDiffEmpty: {
+    padding: 10,
+    color: map.TEXT_PLACEHOLDER_COLOR
+  },
 
   // stateError: {
   //   padding: '10px',
@@ -247,6 +246,11 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   // treeItemHint: {
   //   color: map.ITEM_HINT_COLOR
   // },
+
+  treeItemKey: {
+    fontFamily: MONOSPACE_FONT,
+    fontSize: 12
+  },
 
   previewHeader: {
     paddingVertical: 5,
@@ -295,32 +299,41 @@ const getSheetFromColorMap = (map: ReturnType<typeof colorMap>) => ({
   //   color: map.TEXT_COLOR
   // },
 
-  // diffWrap: {
-  //   position: 'relative',
-  //   'z-index': 1
-  // },
+  diffWrap: {
+    position: 'relative',
+    zIndex: 1
+  },
 
-  // diffAdd: {
-  //   'background-color': map.DIFF_ADD_COLOR
-  // },
+  diffAdd: {
+    fontFamily: MONOSPACE_FONT,
+    color: map.TEXT_COLOR,
+    backgroundColor: map.DIFF_ADD_COLOR
+  },
 
-  // diffRemove: {
-  //   'text-decoration': 'line-through',
-  //   'background-color': map.DIFF_REMOVE_COLOR
-  // },
+  diffRemove: {
+    color: map.TEXT_COLOR,
+    fontFamily: MONOSPACE_FONT,
+    textDecorationLine: 'line-through',
+    backgroundColor: map.DIFF_REMOVE_COLOR
+  },
 
-  // diffUpdateFrom: {
-  //   'text-decoration': 'line-through',
-  //   'background-color': map.DIFF_REMOVE_COLOR
-  // },
+  diffUpdateFrom: {
+    color: map.TEXT_COLOR,
+    fontFamily: MONOSPACE_FONT,
+    textDecorationLine: 'line-through',
+    backgroundColor: map.DIFF_REMOVE_COLOR
+  },
 
-  // diffUpdateTo: {
-  //   'background-color': map.DIFF_ADD_COLOR
-  // },
+  diffUpdateTo: {
+    color: map.TEXT_COLOR,
+    fontFamily: MONOSPACE_FONT,
+    backgroundColor: map.DIFF_ADD_COLOR
+  },
 
-  // diffUpdateArrow: {
-  //   color: map.DIFF_ARROW_COLOR
-  // },
+  diffUpdateArrow: {
+    fontFamily: MONOSPACE_FONT,
+    color: map.DIFF_ARROW_COLOR
+  },
 
   // rightSlider: {
   //   'font-smoothing': 'subpixel-antialiased', // http://stackoverflow.com/a/21136111/4218591
