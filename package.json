@@ -1,6 +1,6 @@
 {
   "name": "react-native-redux-devtools",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Redux debugging tools for React Native apps",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,3 +1,5 @@
 example
 src
 screenshots
+.vscode
+.DS_Store
